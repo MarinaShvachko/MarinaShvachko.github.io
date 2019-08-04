@@ -1,0 +1,171 @@
+/* TODO: написать в одну строку все, что можно объединить*/
+
+* {
+	margin: 0;
+}
+
+html,
+body {
+  	height: 100%;
+}
+
+h2 {
+	text-transform: uppercase;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 42px;
+    letter-spacing: -1px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+p {
+	font-family: 'Arial';
+    color: #2c2c2c;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+h3 {
+	font-family: 'Arial';
+    font-size: 25px;
+    line-height: 28px;
+    color: #00af58;
+    padding-bottom: 15px;
+}
+
+a {
+	text-decoration: none;
+	color: #fff;
+}
+
+a:hover { 
+    text-decoration: underline;
+}
+
+.container {
+	width: 60%;
+	display: flex;
+	flex-wrap: wrap;
+	margin: auto;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
+	display: flex;
+}
+
+.header a {
+	padding: 16px;
+	display: block;
+	/*border-right: 1px solid #fff;*/
+	width: 50px;
+	text-align: center;
+}
+
+.header {
+	width: 100%;
+	background: #2c2c2c;
+	height: 50px;
+}
+
+/***** main info in left side *****/
+
+.linkCV {
+	text-decoration: underline;
+	color: #2c2c2c;
+}
+
+.contactInfo {
+	width: 30%;
+	min-height: calc(100vh - 100px);
+}
+
+.contactInfoContainer {
+	width: 95%;
+
+}
+
+/***** skills *****/
+
+.contactInfoContainer2 {
+	width: 95%;
+	margin: auto; /*написать в строку отступы*/
+	margin-bottom: 20px;
+	
+}
+
+.skills {
+	width: 70%;
+	min-height: calc(100vh - 100px);
+	box-sizing: border-box;
+    border-left: 10px solid #00af58;
+}
+
+
+.skill {
+	padding-bottom: 15px;
+}
+
+td {
+	padding-right: 100px;
+}
+
+.programmes {
+	font-family: 'Arial';
+    color: #2c2c2c;
+    font-size: 20px;
+    line-height: 28px;
+    padding-bottom: 20px;
+    width: 100%;
+    display: block;
+}
+
+tbody {
+    display: inline-block;
+    width: 100%;
+    overflow: auto;
+}
+
+/***** work experience *****/
+
+.city {
+	font-size: 17px;
+}
+
+.position {
+	font-weight: bold;
+    font-size: 20px;
+}
+
+.date {
+	font-size: 17px;
+    padding-bottom: 10px;
+}
+
+/***** footer *****/
+
+.footer {
+	width: 100%;
+	background: #2c2c2c;
+	height: 50px;
+	display: flex;
+	align-self: flex-end;
+}
+
+.copirait {
+	width:100%;
+	align-self: flex-end;
+}
+
+.footerText {
+	font-family: 'Arial';
+    color: #fff;
+    font-size: 11px;
+    line-height: 28px;
+    padding-left: 25px;
+    padding-bottom: 5px;
+}
+

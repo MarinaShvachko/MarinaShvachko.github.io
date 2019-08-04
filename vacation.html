@@ -1,0 +1,77 @@
+<!-- TODO add atl to images -->
+<!-- TODO add semantic elements -->
+<!-- TODO перенести адаптив в отдельный файл -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="css/stylesTurkey.css">
+    <!--<link rel="stylesheet" href="css/adaptiveCV.css">-->
+    <title>Vacation</title>
+</head>
+
+<div class="container">
+    <body>
+
+                            <header class="header">
+                                <div class="menuBurger"><svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+
+                         <g>
+                          <title>background</title>
+                          <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+                         </g>
+                         <g>
+                          <title>Layer 1</title>
+                          <path fill="#049900" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z"/>
+                         </g>
+                        </svg></div>
+                                    <ul class="menu clearfix">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="CV.html">CV</a></li>
+                                        <!--<li><a href="https://blondylikes.wordpress.com/" target="_blank">Blog</a></li>-->
+                                        <li><a href="projects.html">Projects</a></li>
+                                        <!--<li><a href="">Punkt</a></li>-->
+                                        <li><a href="travel.html">Travel</a></li>
+                                    </ul>
+                            </header>
+
+
+<div class="storyFromVacation">
+        
+        <a class="days" href="#" onclick="document.getElementById('div_for_insert').innerHTML = about_vacation">My vacations in Europe</a>
+
+        <a class="days" href="#" onclick="document.getElementById('div_for_insert').innerHTML = day1">Part 1 or the day of sandwiches</a>
+
+        <a class="days" href="#" onclick="document.getElementById('div_for_insert').innerHTML = budapest">Part 2 – Budapest</a>
+
+        <a class="days" href="#" onclick="document.getElementById('div_for_insert').innerHTML = prague">Part 3 – Prague</a>
+
+        <a class="days" href="#" onclick="document.getElementById('div_for_insert').innerHTML = vienna">Part 4 – Vienna</a>
+</div>
+
+<div class="storyContent">
+        
+            <div id="div_for_insert"> 
+              <p>Choose the topic</p>
+            </div>     
+</div>           
+</body>
+
+
+    <div class="footer">
+        <div class="copirait">
+            <p class="footerText">Made by Marina Shvachko, 2019</p>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="script.js"></script>
+<script src="js/scriptVacation.js"></script> 
+
+
+</html>

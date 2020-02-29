@@ -1,5 +1,19 @@
 /* TODO: написать в одну строку все, что можно объединить*/
 
+@media screen and (max-width: 1520px) {
+
+.project {
+    width: 48%;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    background-position: center;
+    background-size: cover;
+    border-color: #333;
+    margin-top: 15px;
+  }
+
+}
+
 @media screen and (max-width: 960px) {
 
 	.container {
@@ -10,6 +24,12 @@
 
 .project {
     width: 33.33%;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    background-position: center;
+    background-size: cover;
+    border-color: #333;
+    margin-top: 15px;
 	}
 
 }
@@ -36,6 +56,8 @@
 
 	.project {
     width: 100%;
+
+
 	}
 }
 
@@ -68,6 +90,12 @@
 
      .container {
     width: 100%;
+}
+
+.project {
+  width: 95%;
+  margin-left: auto;
+    margin-right: auto;
 }
 
 }

@@ -128,6 +128,10 @@ ul {
 	width: 33%;
 }
 
+.panoramicPhotoInText {
+	width: 100%;
+}
+
 .aroundPhoto {
     margin-bottom: 24px;
 }

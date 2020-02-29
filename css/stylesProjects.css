@@ -59,7 +59,13 @@ ul {
 	width: 20%;
 	box-sizing: border-box;
 	border: 1px solid #fff;
-	height: 100px;
+	height: 195px;
+	box-sizing: border-box;
+    background-position: center;
+    background-size: cover;
+    border-color: #333;
+    margin-top: 15px;
+    margin-right: 10px;
 }
 
 .try {
@@ -77,10 +83,19 @@ ul {
     padding-top: 30px;
 }
 
+.projectNameWithoutLink {
+	font-family: 'Arial';
+    color: #2c2c2c;
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    padding-top: 30px;
+}
+
 .source {
 	font-family: 'Arial';
     color: #2c2c2c;
-    font-size: 10px;
+    font-size: 16px;
     line-height: 28px;
     text-align: center;
     color: blue;

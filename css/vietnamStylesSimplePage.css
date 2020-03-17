@@ -287,66 +287,72 @@ ul {
     }
 
     .slider__item_1 {
-      background: url("../img/me.jpg") center;
+      background: url("../img/vietnam/1slide.jpg") center;
        height: 600px;
        background-size: cover;
     }
 
     .slider__item_2 {
-      background: url("../img/casino.jpg") no-repeat;
+      background: url("../img/vietnam/2slider.jpg") no-repeat;
       height: 600px;
       background-size: cover;
     }
 
     .slider__item_3 {
-      background: url("../img/me.jpg") center;
+      background: url("../img/vietnam/3slide.jpg") center;
       height: 600px;
       background-size: cover;
     }
 
     .slider__item_4 {
-      background: url("../img/casino.jpg") center;
+      background: url("../img/vietnam/4slide.jpg") center;
        height: 600px;
        background-size: cover;
     }
 
-
-
      .slider__item_5 {
-      background: url("../img/me.jpg") center;
+      background: url("../img/vietnam/5slide.jpg") center;
        height: 600px;
        background-size: cover;
     }
 
     .slider__item_6 {
-      background: url("../img/casino.jpg") center;
+      background: url("../img/vietnam/6slide.jpg") center;
       height: 600px;
       background-size: cover;
     }
 
     .slider__item_7 {
-      background: url("../img/me.jpg") center;
+      background: url("../img/vietnam/7slide.jpg") center;
       height: 600px;
       background-size: cover;
     }
 
     .slider__item_8 {
-      background: url("../img/casino.jpg") center;
+      background: url("../img/vietnam/8slide.jpg") center;
        height: 600px;
        background-size: cover;
     }
 
     .slider__item_9 {
-      background: url("../img/me.jpg") center;
+      background: url("../img/vietnam/9slide.jpg") center;
       height: 600px;
       background-size: cover;
     }
 
     .slider__item_10 {
-      background: url("../img/casino.jpg") center;
+      background: url("../img/vietnam/10slide.jpg") center;
        height: 600px;
        background-size: cover;
     }
+
+    .slider__item_11 {
+      background: url("../img/vietnam/11slide.jpg") center;
+       height: 600px;
+       background-size: cover;
+    }
+
+
 
     .slider__item_inner {
       position: absolute;

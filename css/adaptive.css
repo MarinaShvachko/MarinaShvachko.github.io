@@ -30,6 +30,12 @@
 	}
 }
 
+@media screen and (max-width: 1160px) {
+	p {
+    font-size: 18px;
+	}
+}
+
 @media screen and (max-width: 959px) {
 	.container {
 		width:80%;
@@ -71,6 +77,10 @@
 
 	.certificates, .projects {
 		height: 100px;
+	}
+
+	p {
+    font-size: 14px;
 	}
 
 }
@@ -154,6 +164,10 @@
 
    .container {
     width: 100%;
+}
+
+p {
+    font-size: 15px;
 }
 
   

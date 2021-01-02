@@ -86,7 +86,8 @@ ul {
 	height: 100%;
 	display: flex;
 	flex-wrap: wrap;
-	border-bottom: outset;
+	/*border-bottom: outset;*/
+	margin-bottom: 30px;
 }
 
 .bookDescriptionLeft2 {

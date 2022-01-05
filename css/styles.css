@@ -91,12 +91,12 @@ p {
     flex-direction: column;
 }
 
-.mainLosung {
+.mainSlogan {
 	width:100%;
 	order: 1;
 }
 
-.losung {
+.slogan {
 	width: 100%;
 	order:2;
 	text-align: center;
@@ -134,7 +134,7 @@ p {
 /***** certificates *****/
 
 .certificateTitle {
-	font-size: 25px;
+	font-size: 22px;
     line-height: 38px;
     letter-spacing: -0.8px;
     text-transform: uppercase;
@@ -157,7 +157,7 @@ p {
 	display: flex;
 }
 
-.cetrificat {
+.certificate {
 	width: 33%;
 	align-self: center;
 }

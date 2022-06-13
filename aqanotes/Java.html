@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="stylesheet" href="../css/stylesAqaNotes.css">
+      <link rel="stylesheet" href="../css/adaptiveStylesAqaNotes.css">
+      <title>Greece</title>
+   </head>
+   <body>
+      <div class="container">
+         <header class="header">
+            <div class="menuBurger">
+               <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                  <g>
+                     <title>background</title>
+                     <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1" />
+                  </g>
+                  <g>
+                     <title>Layer 1</title>
+                     <path fill="#049900" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z" />
+                  </g>
+               </svg>
+            </div>
+            <ul class="menu clearfix">
+               <li>
+                  <a href="../index.html">Home</a>
+               </li>
+               <li>
+                  <a href="../CV.html">CV</a>
+               </li>
+               <li>
+                  <a href="../projects.html">Projects</a>
+               </li>
+               <li>
+                  <a href="../travel.html">Travel</a>
+               </li>
+               <li>
+                  <a href="../books.html">Books</a>
+               </li>
+            </ul>
+         </header>
+         <div class="projectWrapper">
+            <h4>Base principles of OOP</h4>
+            <h3>Encapsulation</h3>
+            <p>This is data hiding and protecting from outside. It is implementing by using access modifiers.</p>
+            <p>There are four access modifiers:</p>
+            <ol>
+               <li>public - available to the whole world.</li>
+               <li>protected - access from the same package and in addition from all subclasses of its class.</li>
+               <li>default (or no keyword) - access from the same package only.</li>
+               <li>private - access from the same class only.</li>
+            </ol>
+            <p>A top-level class can use public or default access modifiers only. At the member level, we can use all four.</p>
+            <p>General approach with variables is:</p>
+            <ol>
+               <li>Create private variables</li>
+               <li>Create publick methods to get these variables instead of directly calling the variable</li>
+               <li>Use naming convention set() and get() for these methods</li>
+            </ol>
+            <pre>
+  <code>
+    public class Cat {
+        private int age = 0;
+
+      public void setAge(int age) {
+        this.age=age;
+      }
+
+      public int getAge() {
+        return this.age;
+      }
+    }
+  </code>
+</pre>
+            <p class="note">NOTE: it is possible to add constraints in setter, for example I want nobody set an age <= 0</p>
+            <pre>
+  <code>
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age=age;
+        } else {
+            System.out.println("Age has to be > 0");
+        }
+    }
+  </code>
+</pre>
+            <p>Now it is possible to call setter if I want to change the age, or call getter if I want to get the age.</p>
+            <pre>
+  <code>
+    public class encapsulationExample {
+      public static void main(String[] args) {
+
+        Cat whiteCat = new Cat();
+        whiteCat.setAge(33); //cat's age is successfully set
+
+        Cat blackCat = new Cat();
+        whiteCat.setAge(0); //the error will be shown "Age has to be > 0"
+      }
+    }
+  </code>
+</pre>
+            <h3>Inheritance</h3>
+            <p>Superclass (parent) contains common features that are needed in all subclasses (children). Inheritance is implemented by the keyword "extends".</p>
+            <p>Subclass inherits all the features of superclass and has a "is a" relationship with one. For example "Animal" is a superclass, it's subclass is a class "Cat" . The cat is an animal.</p>
+            <p>A class can inherit only from one class i.e. only one keyword "extends" can be used.</p>
+            <p><b>Types of inheritance:</b></p>
+            <p>on Class level:</p>
+            <ol>
+               <li>Single - a class inherits only one parent class</li>
+               <li> MultiLevel - a class_1 is inherited by a class_2 and this class_2 also gets inherited by class_3 and this process goes on</li>
+               <li>Hierarchical - one class is inherited by many sub classes</li>
+               <p>There is one more type of inheritance on Interface level:</p>
+               <li>Multiple - one class implements more than one interface</li>
+            </ol>
+            <p>Example of inheritance:</p>
+            <p>Super class Animal</p>
+            <pre>
+  <code>
+  public class Animal {
+    public int age;
+    public String name;
+
+    public void eat() {
+        System.out.println("This is superclass");
+    }
+  }
+  </code>
+</pre>
+            <p>Subclass Cat. There are no methods and variables in the subclass Cat, but we can have an access to methods and variable of Animal class because they are inherited.</p>
+            <pre>
+  <code>
+  public class Cat <b>extends</b> Animal {
+
+    public static void main(String[] args) {
+
+        Cat whiteCat = new Cat();
+        whiteCat.name = "Bursic"; //we have an access to a variable "name" from the parent class
+        whiteCat.eat(); //we can call a method from a parent class, the output will be "This is superclass"
+    }
+  }
+  </code>
+</pre>
+            <h3>Polymorphism</h3>
+            <p>Examples of polymorphism are:</p>
+            <p><b>1. Overloading</b></p>
+            <p>One class contains methods with the same name but with different parameters' types. It is a compile time type of polymorphism, sometimes is named early biding or static biding.</p>
+            <pre>
+  <code>
+  public class OverloadingExample {
+
+    public void person(String name, String surname) {}
+
+    public void person (String name, int age) {}
+
+    public void person (int age, String name) {}
+  }
+  </code>
+</pre>
+            <p>Be careful not to faces with an Ambiguous method call. Two int variables are passed to the method add(), so both methods add() fit and we have an error. To solve this problem we need to pass corresponding parameter's types like o.add(1.0, 2) this time the method public void add (double d, int i) will be called.</p>
+            <p>
+               <img class="FullimgInText" src="../img/java/AmbiguousmethodCall.jpg" alt="Example testng.xml file">
+            </p>
+            <p><b>2. Overriding</b></p>
+            <p>Subclass uses methods from parent class, with the same name and parameters, but return other information. Type of returned information should be the same (exept the case when a return type is a className and there is parent-child inheritance). It is a runtime type of polimorphism, sometimes is named as late biding or dynamic biding.</p>
+            <p>It is possible to change an access modifier, but not to reduce visibility.</p>
+            <p>Parent class</p>
+            <pre>
+  <code>
+  public class Animal {
+
+    <b>protected</b> void eat() {
+        System.out.println("Animal is eating");
+    }
+  }
+  </code>
+</pre>
+            <p>Subclass. Overridden methods should have an annotation @Override. We can NOT override static methods.</p>
+            <pre>
+  <code>
+  public class Cat extends Animal {
+
+    <b>@Override</b>
+    <b>public</b> void eat() {
+        System.out.println("Cat is eating");
+    }
+  }
+  </code>
+</pre>
+            <p>Thus, after execution of the code the output will be "Cat is eating". The method from a child class overrode the parent method and returned the text from Cat's class. </p>
+            <p>A list of methods we can call depend on the type of variable, what they return depend on a type of created object. If a child class not implements a method from a superclass, the method from parent class will be called.</p>
+            <p>Parent class</p>
+            <pre>
+  <code>
+  public class Animal {
+
+    protected void eat() {
+        System.out.println("Animal is eating");
+    }
+  }
+  </code>
+</pre>
+            <p>Child class</p>
+            <pre>
+  <code>
+  public class Cat extends Animal {
+
+    public void sleep() {
+        System.out.println("Cat is sleeping");
+    }
+  }
+  </code>
+</pre>
+            <p>We can call the method eat(), and can not call the method sleep() because the type of variable is Animal</p>
+            <p>
+               <img class="FullimgInText" src="../img/java/polymorphism.jpg" alt="Example of polymorphism">
+            </p>
+            <h3>Abstraction</h3>
+            <p>It is a design concept on which we only declare functionality but doesn't define it, that means we create abstract methods without bodies. The purpose is in highlighting the most important characteristics and information about the object.</p>
+            <p> It is not possible to initialize an abstract class, we should create a child class and inherit an abstract class, then implement all abstact methods.</p>
+            <p>Abstract class can contain abstract and not abstract methods. If at least one method in a class is an abstract one, thus the class has to be an abstract class.</p>
+            <p>Example of abstarct class:</p>
+            <pre>
+  <code>
+  public <b>abstract</b> class Animal {
+
+    protected void eat() {
+        System.out.println("Animal is eating");
+    }
+    
+    public abstract void sleep();
+  }
+  </code>
+</pre>
+            <pre>
+  <code>
+  public class Cat extends Animal {
+
+    @Override
+    public void sleep() {}
+  }
+  </code>
+</pre>
+            <p>Summary:</p>
+            <p>1 – Class is like an object constructor, or a "blueprint" for creating objects</p>
+            <p>2 – Object is an instance of a class</p>
+            <p>3 – Early binding - a process where the compiler determines the type of object and resolves the method during the compile-time</p>
+            <p>4 – Late binding - the compiler should perform no argument checks, no type checks on a method call and should leave it all to the runtime</p>
+            <p>5 – Class has states - represents the data (value) of an object and behavior - represents the behavior (functionality) of an object</p>
+         </div>
+         <div class="footer">
+            <div class="copirait">
+               <p class="footerText">Made by Marina Shvachko, 2022</p>
+            </div>
+         </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="script.js"></script>
+   </body>
+</html>

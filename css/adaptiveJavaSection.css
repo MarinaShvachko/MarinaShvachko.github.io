@@ -7,7 +7,7 @@
     box-sizing: border-box;
     border: 1px solid #fff;
     background-position: center;
-    /*background-size: cover;*/
+    background-size: cover;
     border-color: #00994d;
     margin-top: 15px;
   }
@@ -27,6 +27,7 @@
     box-sizing: border-box;
     border: 1px solid #fff;
     background-position: center;
+    background-size: cover;
     border-color: #00994d;
     margin-top: 15px;
 	}
@@ -55,6 +56,8 @@
 
 	.project {
     width: 100%;
+
+
 	}
 }
 
@@ -85,14 +88,14 @@
     padding-top: 9px;
   }
 
-    .container {
+     .container {
     width: 100%;
-  }
+}
 
-  .project {
-    width: 95%;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.project {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 }

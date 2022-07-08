@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../css/stylesAqaNotes.css">
+    <link rel="stylesheet" href="../css/adaptiveStylesAqaNotes.css">
+    <title>TestNg</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="menuBurger">
+          <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <title>background</title>
+              <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1" />
+            </g>
+            <g>
+              <title>Layer 1</title>
+              <path fill="#049900" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z" />
+            </g>
+          </svg>
+        </div>
+        <ul class="menu clearfix">
+          <li>
+            <a href="../index.html">Home</a>
+          </li>
+          <li>
+            <a href="../CV.html">CV</a>
+          </li>
+          <li>
+            <a href="../projects.html">Projects</a>
+          </li>
+          <li>
+            <a href="../travel.html">Travel</a>
+          </li>
+          <li>
+            <a href="../books.html">Books</a>
+          </li>
+        </ul>
+      </header>
+      <div class="projectWrapper">
+
+<h3>Basic things that TestNG can do</h3>
+
+<p>TestNg is a test automation framework for managing and executing test cases. Testng.xml file allows to configure execution of tests and define parameters. Also TestNG can generate reports. To repeat all examples below you need to create in your IDE (I use IntelliJ IDEA) a Maven project and add only one dependency in a pom.xml file:</p>
+
+<pre>
+  <code>
+< dependencies>
+  < dependency>
+    < groupId>org.testng</groupId>
+      < artifactId>testng</artifactId>
+    < version>7.5</version>
+  < /dependency>
+< /dependencies>
+  </code>
+</pre>
+
+<p>Below are basic things you can do with TestNG</p>
+
+<h3>Annotations</h3>
+
+<p>With TestNg we don't need to create a main() method. We use the @Test annotation that marks a method as a test case. All annotations are made with a sign "@". For example if we want to create methods that will be run BEFORE or AFTER tests, we can use corresponding annotations. Lower they are shown in the order they are executed</p>
+
+
+<p>@BeforeSuite</p>
+<p>@BeforeTest</p>
+<p> @BeforeGroups</p>
+   <p>@BeforeClass</p>
+       <p>@BeforeMethod</p>
+      <p>@AfterMethod</p> 
+    <p>@AfterTest</p>
+    <p>@AfterClass</p>
+    <p>@AfterGroups</p>
+    <p>@AfterSuite</p>
+
+
+
+
+<h3>Assertions. Hard assertion</h3>
+
+<p>If a test case failed, all code after hard assertion in this test case won't be executed. To create hard assertions just call methods <code>Assert.assert...("actual result", "expected result", "text that will be shown if a test failed");</code></p>
+
+<p>Assertion in test case chickenSalad() is deliberately failed</p>
+
+<pre>
+  <code>
+    public class Salads {
+
+      @Test
+      public void chickenSalad() {
+        Assert.assertEquals("Chicken salad", "Tomato salad", "Error - salads are different!"); //this assertion will fail
+
+        System.out.println("I'm the code that won't be executed");
+      }
+    }
+  </code>
+</pre>
+
+<p>In the output we can see that after assertion an error was thrown and execution of code is stopped.</p>
+<p>
+  <img class="FullimgInText" src="../img/testng/HardAssert.png" alt="Hard assertion">
+</p>
+
+<h3>Assertions. Soft assertion</h3>
+
+<p>If we want all code in our test case will be executed even if there were errors, we can create an object of a class SoftAssert and use it to call assertions.</p>
+<p class="note">If soft assertion is used, a method assertAll() should be the last statement of a test case, without this method a test case will be marked as passed and no errors will be shown.</p>
+
+<pre>
+  <code>
+    public class Salads {
+    SoftAssert softAssert = new SoftAssert();
+
+      @Test
+      public void chickenSalad() {
+        <b>softAssert</b>.assertEquals("Chicken salad", "Tomato salad", "Error - salads are different!");
+
+        System.out.println("I'm the code that won't be executed");
+        <b>softAssert.assertAll();</b>
+      }
+    }
+  </code>
+</pre>
+
+<p>This time all code in the method was executed and in console we see the text "I'm the code that won't be executed". The method assertAll() caught the error and threw it.</p>
+
+
+<p>
+  <img class="FullimgInText" src="../img/testng/SoftAssert.png" alt="Soft assertion">
+</p>
+
+<p>Below is an example of the test execution without the method assertAll(). Test case failed but we can't see it.</p>
+
+<p>
+  <img class="FullimgInText" src="../img/testng/FalsPositiveResultOfCode.png" alt="Fals positive result of code">
+</p>
+
+
+
+
+<h3>Start tests via testng.xml file</h3>
+<p>It's possible to run one test case, some or all test cases in a class\classes. But the order of test cases execution is not fixed.</p>
+<p>All settings are made inside a tag group "test". Below are examples of testng.xml with different settings.</p>
+
+<p>A class Drinks and a class Salads are located in a package "food"</p>
+<pre>
+  <code>
+package food;
+
+public class Drinks {
+
+    @Test
+    public void cola() {
+        System.out.println("Cola is ready");
+    }
+
+    @Test
+    public void tea() {
+        System.out.println("Tea is ready");
+    }
+}
+
+package food;
+
+public class Salads {
+
+    @Test
+    public void chickenSalad() {
+        System.out.println("Chicken salad is ready");
+    }
+
+    @Test
+    public void tomatoSalad() {
+        System.out.println("Tomato salad is ready");
+    }
+}
+  </code>
+</pre>
+
+<p>Testng.xml</p>
+
+<pre>
+  <code>
+< ?xml version="1.0" encoding="UTF-8"?>
+< !DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+< suite name="Drinks">
+
+    < test name="<b>Run only one test case in a class Drinks</b>">
+        < classes>
+            < class name="food.Drinks"> //which class will be run
+              < methods>
+                < include name="cola"/> //which method will be run
+              < /methods>
+            < /class>
+        < /classes>
+    < /test>
+
+    < test name="<b>Run all test cases in a class Drinks</b>">
+        < classes>
+            < class name="food.Drinks">< /class> //whick class will be run
+        < /classes>
+    < /test>
+
+   < test name="<b>Run all test cases in classes Drinks and Salads</b>">
+        < classes>
+            < class name="food.Drinks">< /class> //whick class will be run
+            < class name="food.Salads">< /class> //whick class will be run
+        < /classes>
+    < /test>
+
+    < test name="<b>Run all test in a package</b>"
+        < packages>
+            < package name="food">< /package> //all test cases from this package will be run
+        < /packages>
+    < /test>
+
+< /suite>
+  </code>
+</pre>
+
+
+<h3>3 ways to skip tests</h3>
+<p>The first option - to use annotation (enabled = false). This test case won't be run at all</p>
+<pre>
+  <code>
+    @Test<b>(enabled = false)</b>
+    public void tomatoSalad() {
+        System.out.println("Tomato salad is ready");
+    }
+  </code>
+</pre>
+
+<p>The second - use exclude tag in testng.xml</p>
+<pre>
+  <code>
+   < test name="Do not run a method in a class Drinks">
+        < classes>
+            < class name="food.Drinks">
+            < methods>
+                < exclude name="tea"/>
+            < /methods>
+            < /class>
+        < /classes>
+    < /test> 
+  </code>
+</pre>
+
+<p>Third - to throw new SkipException to ignore the test. But this time you will see that this test exists</p>
+<pre>
+  <code>
+    public class Salads {
+
+    @Test
+    public void chickenSalad() {
+        System.out.println("Chicken salad is ready");
+    }
+
+    @Test
+    public void tomatoSalad() {
+        System.out.println("Tomato salad is ready");
+        <b>throw  new SkipException("I skip this test deliberately");</b>
+    }
+}
+  </code>
+</pre>
+
+<p>In this time ignored test will be seen among executed tests</p>
+<p>
+  <img class="FullimgInText" src="../img/testng/IgnoredTestCase.png" alt="Ignored test case">
+</p>
+
+<h3>Priority</h3>
+<p>Tests within a class are executed in different order each time we run them. If we want one or more tests were executed earlier than other, we can use "priority" settings. Numeration in priority starts from 0.</p>
+
+<pre>
+  <code>
+  public class Salads {
+
+    @Test(priority = 2)
+    public void chickenSalad() {
+        System.out.println("Chicken salad is ready");
+    }
+
+    @Test(priority = 1) <b>//this method will run before chickenSalad()</b>
+    public void tomatoSalad() {
+        System.out.println("Tomato salad is ready");
+    }
+  }
+  </code>
+</pre>
+
+
+<h3>Start group of tests via testng.xml</h3>
+<p>To assign a group to a test case just use annotation <code>@Test(groups="here should be the name of group)</code>. One test case can be linked to some groups, then name of groups should be in curly brackets <code>@Test(groups = {"the name of first group", "the name of second group"})</code>.</p>
+
+<pre>
+  <code>
+  public class Drinks {
+
+    @Test
+    public void cola() {
+        System.out.println("Cola is ready");
+    }
+
+    @Test(groups = "Regress")
+    public void tea() {
+        System.out.println("Tea is ready");
+    }
+  }
+
+  public class Salads {
+
+    @Test(groups = {"Regress", "Smoke"})
+    public void chickenSalad() {
+        System.out.println("I'm the code that won't be executed");
+    }
+
+    @Test(groups = "Smoke")
+    public void tomatoSalad() {
+        System.out.println("Tomato salad is ready");
+    }
+  }
+  </code>
+</pre>
+
+<p>To start all test via testng.xml, that are linked with a group you should specify the name of the group in a tag "include" and what class\classes you want to run. So, in the example above the group "Regress" is in two classes: in Salads and in Drinks, if I want to run both classes I should specify them.</p>
+
+<pre>
+  <code>
+< ?xml version="1.0" encoding="UTF-8"?>
+< !DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+< suite name="Drinks">
+
+    < test name="Run a group Regress in classes Drinks and Salads">
+        < groups>
+            < run>
+                < include name="Regress">< /include>
+            < /run>
+        < /groups>
+        < classes>
+            < class name="food.Drinks">< /class>
+            < class name="food.Salads">< /class>
+        < /classes>
+    < /test>
+
+< /suite>
+  </code>
+</pre>
+
+<p>Thus, in the class Drinks the method tea() has a group "Regress" and in the class Salads the method chickenSalad() has groups "Regress" and "Smoke", but it is executed because of group "Regress".</p>
+
+<p>
+   <img class="FullimgInText" src="../img/testng/RunGroupOfTestsInAllClasses.png" alt="Run group of tests in all classes">
+</p>
+
+<p>If you need not execute a group just change tag "include" to "exclude". If a test is in excluded group it won't be run even if at the same time it is in included groups.</p>
+<p>In the class Salads the method chickenSalad() lineked with 2 groups: (groups = {"Regress", "Smoke"}). In testng.xml the group "Regress" excluded, but the group "Smoke" included, but the method won't be run.</p>
+
+<pre>
+  <code>
+    < test name="Run the group Smoke but not run group Regress">
+        < groups>
+            < run>
+                < exclude name="Regress"/>
+                < include name="Smoke"/>
+            < /run>
+        < /groups>
+        < classes>
+            < class name="food.Drinks">< /class>
+            < class name="food.Salads">< /class>
+        < /classes>
+    < /test>
+  </code>
+</pre>
+
+<p>
+  <img class="FullimgInText" src="../img/testng/ExcludeAGroupOfTests.png" alt="Exclude a group of tests">
+</p>
+
+<h3>Test dependentsy</h3>
+
+<p>Set ut with a help of annotation  @Test(dependsOnMethods = "name of a method"). Test case can depends on some methods, in this case names of methods should be in curly brackets @Test(dependsOnMethods = {"cola", "tea"})</p>
+<p>Tests can be dependable only vithin one class. A dependent method will only be run after the method it depends on. If this method failed then dependable method is ignored.</p>
+
+<p>If you want to execute dependable test in any cases, you should add to the annotation "alwaysRun = true".</p>
+
+<pre>
+  <code>
+  public class Drinks {
+
+    @Test
+    public void cola() {
+        Assert.assertEquals("Cat", "Dog"); //deliberately fail this method
+        System.out.println("Cola is ready");
+    }
+
+    @Test(groups = "Regress", dependsOnMethods = "cola") //this method will be ignored because the main method failed
+    public void tea() {
+        System.out.println("Tea is ready");
+    }
+
+    @Test(groups = "Regress", dependsOnMethods = {"cola", "tea"}, alwaysRun = true) //this method will be executed in any case
+    public void teaThatWillBeExecuted() {
+        System.out.println("Tea is ready");
+    }
+}
+  </code>
+</pre>
+
+<p>Result of execution:</p>
+
+<p>
+               <img class="FullimgInText" src="../img/testng/DependentTests.png" alt="Dependent test">
+            </p>
+            
+
+<h3>Pass Parameters with testng. xml</h3>
+<p>It means we can pass test data from testng.xml during test execution. For this:</p>
+<ol>
+  <li>Create a test case that has a parameter in its signature. A name of the parameter is a key</li>
+  <li>Create annotation @Parameters({"here is the key"}) for test case</li>
+  <li>In testng.xml add a tag "parameter" that keps test data in pairs key - value.</li>
+</ol>
+
+<pre>
+  <code>
+    public class Drinks {
+
+    @Parameters("<b>typeOfCola</b>")
+    @Test
+    public void cola(String <b>typeOfCola</b>) {
+        System.out.println("Cola " + <b>typeOfCola</b> + " is ready");
+    }
+
+    @Parameters({"typeOfTea", "amountOfSugar"})
+    @Test
+    public void tea(String typeOfTea, String amountOfSugar) {
+        System.out.println(typeOfTea + " tea with " + amountOfSugar + " of sugar is ready");
+    }
+
+}
+  </code>
+</pre>
+
+<p>testng.xml:</p>
+<pre>
+  <code>
+< ?xml version="1.0" encoding="UTF-8"?>
+< !DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+< suite name="Parameters">
+
+    < parameter name="typeOfCola" value="without sugar"/>
+    < parameter name="typeOfTea" value="Black"/>
+    < parameter name="amountOfSugar" value="2 spoons"/>
+
+    < test name="Pass parameters from testng.xml to methods">
+        < classes>
+            < class name="food.Drinks"/>
+        < /classes>
+    < /test>
+
+< /suite>
+  </code>
+</pre>
+
+
+<h3>Listeners</h3>
+<p>Listeners implement the interface and catch and report real time events like test fails, test starts and ets. You need to do:</p>
+<ol>
+  <li>Create a class for listeners and implement interface "ITestListener"</li>
+  <li>Override methods from interface (right click on the interface name and chose "override")</li>
+  <li>Realize these methods as you want. For example you can add code in overrided method "onTestFailure" that will do screenshot each time when test is failed</li>
+  <li>Add a tag listeners in testng.xml file and define listener class there</li>
+  <li>Add classes that you want to run</li>
+</ol>
+
+<p>Override methods</p>
+
+
+<p>
+               <img class="FullimgInText" src="../img/testng/Overridemethods.png" alt="Dependent test">
+            </p>
+
+            <p>Realize methods. For example I changed methods onTestStart and "onTestFailure" so they returne the name of each started or failed test.</p>
+
+            <pre>
+              <code>
+    public class Listeners implements ITestListener {
+
+    @Override
+    public void onTestStart(ITestResult result) {
+        System.out.println("This is from listeners: " + result.getName() + " test started");
+    }
+
+    @Override
+    public void onTestFailure(ITestResult result) {
+        System.out.println("This is from listeners: " + result.getName() + " test failed");
+    }
+              </code>
+            </pre>
+
+<p>testng.xml</p>
+
+<pre>
+  <code>
+< ?xml version="1.0" encoding="UTF-8"?>
+< !DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+< suite name="Listeners example">
+
+    < listeners>
+        < listener class-name="testng.listenersExample.Listeners"/>
+    < /listeners>
+    
+    < test name="Listeners test">
+        < classes>
+            < class name="testng.listenersExample.Drinks"/>
+        < /classes>
+    < /test>
+
+< /suite>
+  </code>
+</pre>
+
+
+<p>I run tests from the class Drinks. The method tea() is deliberately failed.</p>
+<pre>
+  <code>
+    public class Drinks {
+
+    @Test
+    public void cola() {
+        System.out.println("Cola is ready");
+    }
+
+    @Test
+    public void tea() {
+        Assert.assertEquals("Cat", "Dog", "Cat and dog can not be equals");
+        System.out.println("Tea is ready");
+    }
+}
+  </code>
+</pre>
+
+<p>So after execution, in output the first row - text from Listeners method onTestStart() "This is from listeners: cola test started" because this method is called when each test is started. Then output of cola() method.</p>
+<p>Lower, again, text from Listeners method onTestStart(), because the method tea() was started. But tea() method failed and we don't see output of this method, but we see output of listener's method onTestFailure().</p>
+
+
+<p>
+               <img class="FullimgInText" src="../img/testng/ListenersExample.png" alt="Listeners example">
+            </p>
+
+
+            <h3>Execute some test suites in one testng.xml file</h3>
+            <p>You need to create a new testng.xml file and add a tag suite-files - suite-file. Then add paths to testng.xml files that you want to execute.</p>
+
+            <pre>
+              <code>
+< ?xml version="1.0" encoding="UTF-8"?>
+< !DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+< suite name="Run some suites">
+
+< suite-files>
+    < suite-file path="testng.xml"/>
+    < suite-file path="testngParameters.xml"/>
+< /suite-files>
+
+< /suite>
+              </code>
+            </pre>
+
+
+<h3>TestNg Reports</h3>
+<p>To have a report you nedd to add in dependencies</p>
+
+ПРОВЕРИТЬ
+
+<pre>
+  <code>
+    <!-- https://mvnrepository.com/artifact/org.uncommons/reportng -->
+< dependency>
+    < groupId>org.uncommons /groupId>
+    < artifactId>reportng< /artifactId>
+    < version>1.1.4< /version>
+< /dependency>
+
+  </code>
+</pre>
+
+
+
+        <p>Summary:</p>
+        <p>1 – Test parralel execution</p>
+        <p>2 – Possibility to run different groups of tests via testng.xml settings</p>
+        <p>3 – Test order execution and priority</p>
+        <p>4 – Easy automate Data Driven Cases</p>
+        <p>5 – </p>
+      </div>
+      <div class="footer">
+        <div class="copirait">
+          <p class="footerText">Made by Marina Shvachko, 2022</p>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

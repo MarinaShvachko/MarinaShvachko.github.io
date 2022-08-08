@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <link rel="stylesheet" href="../css/stylesAqaNotes.css">
       <link rel="stylesheet" href="../css/adaptiveStylesAqaNotes.css">
-      <title>Greece</title>
+      <title>OOP</title>
    </head>
    <body>
       <div class="container">
@@ -143,8 +143,8 @@
   </code>
 </pre>
             <h3>Polymorphism</h3>
-             <p>It's ability for different objects to respond differently to the same message. In object-oriented programming languages, you can define one or more methods with the same name. These methods can perform different actions and return different values</p>
-             <p>Polymorphism allows us to perform a single action in different ways</p>
+             <p>One task is performed by different ways. In object-oriented programming languages, you can define one or more methods with the same name. These methods can perform different actions and return different values.</p>
+             <p>Polymorphism allows us to perform a single action in different ways.</p>
             <p>Examples of polymorphism are:</p>
             <p><b>1. Overloading</b></p>
             <p>One class contains methods with the same name but with different parameters' types. It is a compile time type of polymorphism, sometimes is named early biding or static biding.</p>
@@ -165,7 +165,7 @@
                <img class="FullimgInText" src="../img/java/AmbiguousmethodCall.jpg" alt="Example testng.xml file">
             </p>
             <p><b>2. Overriding</b></p>
-            <p>Subclass uses methods from parent class, with the same name and parameters, but return other information. Type of returned information should be the same (exept the case when a return type is a className and there is parent-child inheritance). It is a runtime type of polimorphism, sometimes is named as late biding or dynamic biding.</p>
+            <p>We can create a method with the same signature (name and parameters) and same return type as in a parent class. But we can return other data in that method, that is specific for a child class. Type of returned information should be the same (exept the case when a return type is a className and there is parent-child inheritance). It is a runtime type of polimorphism, sometimes is named as late biding or dynamic biding.</p>
             <p>It is possible to change an access modifier, but not to reduce visibility.</p>
             <p>Parent class</p>
             <pre>
@@ -220,7 +220,7 @@
             </p>
             <h3>Abstraction</h3>
             <p>It is a design concept on which we only declare functionality but doesn't define it, that means we create abstract methods without bodies. The purpose is in highlighting the most important characteristics and information about the object.</p>
-            <p> It is not possible to initialize an abstract class, we should create a child class and inherit an abstract class, then implement all abstact methods.</p>
+            <p> It is not possible to instantiate an abstract class, we should create a child class and inherit the abstract class, then implement all abstact methods.</p>
             <p>Abstract class can contain abstract and not abstract methods. If at least one method in a class is an abstract one, thus the class has to be an abstract class.</p>
             <p>Example of abstarct class:</p>
             <pre>

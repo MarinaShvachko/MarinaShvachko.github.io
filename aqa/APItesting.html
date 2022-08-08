@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../css/stylesAqaNotes.css">
+    <link rel="stylesheet" href="../css/adaptiveStylesAqaNotes.css">
+    <title>API</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="menuBurger">
+          <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <title>background</title>
+              <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1" />
+            </g>
+            <g>
+              <title>Layer 1</title>
+              <path fill="#049900" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z" />
+            </g>
+          </svg>
+        </div>
+        <ul class="menu clearfix">
+          <li>
+            <a href="../index.html">Home</a>
+          </li>
+          <li>
+            <a href="../CV.html">CV</a>
+          </li>
+          <li>
+            <a href="../projects.html">Projects</a>
+          </li>
+          <li>
+            <a href="../travel.html">Travel</a>
+          </li>
+          <li>
+            <a href="../books.html">Books</a>
+          </li>
+        </ul>
+      </header>
+      <div class="projectWrapper">
+
+<h4>API test automatization with Java</h4>
+<p>Api (Application Programming Interface) is the way how 2 or more application can exchange information with each other. I will use API from the site https://restful-booker.herokuapp.com/ because it was created for testing and education purposes. API is described here https://restful-booker.herokuapp.com/apidoc/index.html</p>
+
+<p>Prerequisites: I use Java 11, IntelliJ IDEA, Maven project</p>
+<p><a href="https://github.com/MarinaShvachko/ExampleApiTests.git" target="_blank">Examples of code could be downloaded here</a></p>
+
+<h3>Dependencies in pom.xml:</h3>
+<pre>
+  <code>
+< dependency>
+  < groupId>com.jayway.restassured< /groupId>
+  < artifactId>rest-assured< /artifactId>
+  < version>2.9.0< /version>
+< /dependency>
+< dependency>
+  < groupId>com.jayway.restassured< /groupId>
+  < artifactId>json-path< /artifactId>
+  < version>2.9.0< /version>
+< /dependency>
+< dependency>
+  < groupId>com.jayway.restassured< /groupId>
+  < artifactId>json-schema-validator< /artifactId>
+  < version>2.9.0< /version>
+< /dependency>
+< dependency>
+  < groupId>javax.xml.bind< /groupId>
+  < artifactId>jaxb-api< /artifactId>
+  < version>2.3.1< /version>
+< /dependency>
+
+
+also I use testNg for starting tests and lombok for generate getters and setters automatically
+
+< dependency>
+  < groupId>org.testng< /groupId>
+  < artifactId>testng< /artifactId>
+  < version>7.5< /version>
+< /dependency>
+< dependency>
+  < groupId>org.projectlombok< /groupId>
+  < artifactId>lombok< /artifactId>
+  < version>1.18.24< /version>
+< /dependency>
+  </code>
+</pre>
+
+
+<h3>Example №1. The simplest example</h3>
+<p>API tests could be built in different ways, but there are the same methods in basis, that could be read like story: <b>given</b> URI and may be some <b>header</b> or a <b>body</b> we want to send, when we make a request, for example <b>get</b> or <b>post</b>, <b>then</b> we want to check the status code in response.</p>
+
+<p>For runnung the simplest API test:</p>
+<ol>
+  <li>Add dependencies specified abow to your pom.xml file</li>
+  <li>Create a class "EndpointsTests"</li>
+  <li>Add a static import: import static com.jayway.restassured.RestAssured.*;</li>
+  <li>Run API test</li>
+</ol>
+
+<p>It takes base URI https://restful-booker.herokuapp.com and makes a GET request to the endpoint "/ping", so the full URL in request = https://restful-booker.herokuapp.com/ping. Then the test checks that status code in response is 201, according the requirements.</p>
+
+<pre>
+  <code>
+import static com.jayway.restassured.RestAssured.*;
+
+public class EndpointsTests {
+
+  @Test
+  public void pingTest() {
+      given()
+              .baseUri("https://restful-booker.herokuapp.com")
+              .when()
+              .get("/ping")
+              .then()
+              .assertThat()
+              .statusCode(201);
+  }
+}
+  </code>
+</pre>
+
+<h3>Example №2. Example where all code is written in the @Test method and data from response is saved</h3>
+
+<p>Usually API tests are more complicated. To create a resourse on a server we need to send some data in request, this data could be in different formats, for example Json, Xml or an object. POST and PATCH requests require we specify the type of data we send, for example for Json - contentType(ContentType.JSON).</p> 
+
+<p>Also we can log our requests and responses to see what happens with a help of log().all()</p>
+
+<p>Let's create a token that we will send in some requests. It could be found in IDE console after running the test "createToken". As this is the website for education purpose all created data are deleted frome the server each 10 minutes.</p>
+
+<p>In request requirements we have:</p>
+<p>
+  <img class="FullimgInText" src="../img/api/APIpostReq.png" alt="API create token requirements">
+</p>
+
+<p>In response requirements we have:</p>
+<p>
+  <img class="FullimgInText" src="../img/api/APIpostRes.png" alt="API create token requirements">
+</p>
+
+
+<p>Example of POST request to create token is below.</p>
+<ol>
+  <li>We make a <b>post</b> request and straightaway <b>save the response in an object Response</b>, so later can get information from it</li>
+  <li>In <b>body</b> we send json as String, method and data that we have to send specified in API requirements</li>
+  <li>To extract response we need to use <b>.extract().response()</b> methods</li>
+  <li>As a result the response will be saved in an object and we can get data from it with a help of <b>path()</b> method.</code></li>
+</ol>
+
+<p>As the response is very simple and data in json is kept in key-value pairs, to get token id I just specify the name of the key "token" and get the value - the token id itself. Token will be printed in console, save it for future requests.</p>
+
+<pre>
+  <code>
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.response.Response;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+import utulity.Url;
+
+import static com.jayway.restassured.RestAssured.given;
+
+public class PostTest {
+
+    @Test
+    public void createToken() {
+        RestAssured.baseURI = "https://restful-booker.herokuapp.com";
+
+        <b>Response response</b> = given()
+                .when()
+                .contentType(ContentType.JSON)
+                <b>.body("{\n" +               
+                        "    \"username\" : \"admin\",\n" +
+                        "    \"password\" : \"password123\"\n" +
+                        "}")</b>
+                <b>.post("/auth")</b>
+                .then()
+                .assertThat()
+                .statusCode(200) 
+                .log()           
+                .all()
+                .and()
+                <b>.extract()</b> 
+                <b>.response();</b>
+
+        String token = response<b>.path("token")</b>;
+        System.out.println(token + " - This is a token you need to save");
+    }
+}
+  </code>
+</pre>
+
+<h3>Example №3. Move common code from @Test methods. Send an object instead of String in a body() method</h3>
+
+<p>Serialization and deserialization is quite a big topic and will be described separately. In two words serialization is a creation of Java class/classes based on a Json, so we can send an object in body() method instead of a big String. After all preparation, described below, the structure of a project might looke like:</p>
+
+
+<p>
+  <img class="FullimgInText" src="../img/api/StructureOfTheprojectExample3.png" alt="Structure of a IDEA project">
+</p>
+
+<p>To create a booking we have to send some data. Pay attention that there is a small Json inside a big Json. All Json keys will be Java class parameters. Each Json will be described in a separate class.</p>
+
+<p>
+  <img class="FullimgInText" src="../img/api/APIcreateBooking.png" alt="API create token requirements">
+</p>
+
+<p>So we will have a class "Booking" and a class "BookingDates". I use annotation @Getter and @Setter for automation creation of getters and setters. In "Booking" class:</p>
+
+<ol>
+  <li>Create 6 variables, as in Json from requirements are 6 keys. One of the key is a json</li>
+  <li>To create json inside an another json just create an exempliar of another class</li>
+  <li>Create a method for creatinh booking and initializing data, method returns Booking object as we have to send an object with data in post request</li>
+</ol>
+
+
+<pre>
+  <code>
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter                
+@Setter
+public class Booking {
+    private String firstname;
+    private String lastname;
+    private int totalprice;
+    private boolean depositpaid;
+    private String additionalneeds;
+
+    BookingDates bookingdates; 
+
+    public Booking addBookingAllFieldsFilled(String firstname, String lastname, int totalprice, boolean depositpaid, String additionalneeds, String checkin, String checkout) {
+        //here the booking itself is created
+        Booking booking = new Booking();
+        booking.setFirstname(firstname);
+        booking.setLastname(lastname);
+        booking.setTotalprice(totalprice);
+        booking.setDepositpaid(depositpaid);
+        booking.setAdditionalneeds(additionalneeds);
+
+        //here dates of booking are created and added to the booking
+        BookingDates bookingDates = new BookingDates();
+        bookingDates.setCheckin(checkin);
+        bookingDates.setCheckout(checkout);
+        booking.setBookingdates(bookingDates);
+
+        return booking;
+    }
+}
+  </code>
+</pre>
+
+<p>A class for dates:</p>
+<pre>
+  <code>
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class BookingDates {
+    private String checkin;
+    private String checkout;
+}
+  </code>
+</pre>
+
+
+<p>Now we move all common code from @Test method to the class "BaseClass" not to type each time given().when().then(). There we create a method "postRequest" with parameters for specifying an endpoint, a body as an object. Indicate the ContentType and call post() method. Also response is returned as an object, thus we can get data from it. Notice that the method has to be static not to create an object of BaseClass.</p>
+
+<pre>
+  <code>
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
+import pojoClasses.Booking;
+
+public class BaseClass {
+    public static Response postRequest(String endpoint, Booking booking) { 
+        RequestSpecification requestSpecification = RestAssured.given().body(booking);
+        requestSpecification.contentType(ContentType.JSON);
+        Response response = requestSpecification.post(endpoint);
+        return response;
+    }
+}
+  </code>
+</pre>
+
+<p>In test class:</p>
+<ol>
+  <li>We create an object of the booking we want to send and add data into it</li>
+  <li>Call early created method postRequest(), that sends post() request with our data and save response in an object</li>
+  <li>Make Assert that firstname from respons equals the firstname from request</li>
+  <li>Call method prettyPrint(), that prints the response to console without using log()</li>
+</ol>
+
+<pre>
+  <code>
+import com.jayway.restassured.response.Response;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+import pojoClasses.Booking;
+import utulity.BaseClass;
+import utulity.Url;
+
+import static utulity.Constants.ErrorMessages.*;
+
+public class PostTest {
+    String endPoint = "https://restful-booker.herokuapp.com/booking";
+
+    @Test
+    public void createBooking() {
+        Booking body = new Booking();
+        body = body.addBookingAllFieldsFilled("Diana", "Round", 6, true, "pijamas", "2022-08-04", "2022-08-08");
+
+        Response response = BaseClass.postRequest(endPoint, body);
+
+        Assert.assertEquals(response.path("booking.firstname"), body.getFirstname()); 
+        response.prettyPrint();
+    }
+  }
+  </code>
+</pre>
+
+<p>Now @Test methods is more readable and shorter, easy to maintain.</p>
+
+<h3>Example №4. Call API method with using the token id</h3>
+
+<p>In a class "BaseClass" create a basic method for deletion booking.</p>
+
+<pre>
+  <code>
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
+import pojoClasses.Booking;
+
+public class BaseClass {
+    public static Response deleteRequest(String endPoint, String token) {
+        RequestSpecification requestSpecification = RestAssured.given();
+        requestSpecification.contentType(ContentType.JSON);
+        requestSpecification.cookie("token", token).log().all();
+        Response response = requestSpecification.delete(endPoint);
+        return response;
+    }
+}
+  </code>
+</pre>
+
+<p>In @Test method first of all we need to create a booking and then to delete it.</p>
+
+<pre>
+  <code>
+import com.jayway.restassured.response.Response;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import pojoClasses.Booking;
+import utulity.BaseClass;
+import utulity.Url;
+
+import static utulity.Authentication.getToken;
+import static utulity.Constants.ErrorMessages.STATUS_CODE_IS_NOT_RIGHT;
+
+public class DeleteTest {
+    String endPoint = "https://restful-booker.herokuapp.com/booking/";
+
+    @Test
+    public void deleteBooking() {
+        Booking body = new Booking();
+        body = body.addBookingAllFieldsFilled("Diana", "Round", 6, true, "pijamas", "2022-08-04", "2022-08-08");
+        Response response = BaseClass.postRequest(endPoint, body);
+
+        //get id of created booking as we need it to specify it in delete request
+        endPoint = endPoint + response.path("bookingid");
+
+        Response responseAfterDeletion = BaseClass.deleteRequest(endPoint, "YOUR TOKEN IS HERE");
+
+        Assert.assertEquals(responseAfterDeletion.getStatusCode(), 201);
+    }
+}
+  </code>
+</pre>
+
+
+        <p>Summary:</p>
+        <p>1 – API tests faster to create and run, and more stable then UI tests</p>
+        <p>2 – There are different approaches how to build them and what libraries to use</p>
+      </div>
+      <div class="footer">
+        <div class="copirait">
+          <p class="footerText">Made by Marina Shvachko, 2022</p>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

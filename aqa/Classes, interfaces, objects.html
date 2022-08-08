@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../css/stylesAqaNotes.css">
+    <link rel="stylesheet" href="../css/adaptiveStylesAqaNotes.css">
+    <title>Classes,interfaces,objects</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="menuBurger">
+          <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <title>background</title>
+              <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1" />
+            </g>
+            <g>
+              <title>Layer 1</title>
+              <path fill="#049900" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z" />
+            </g>
+          </svg>
+        </div>
+        <ul class="menu clearfix">
+          <li>
+            <a href="../index.html">Home</a>
+          </li>
+          <li>
+            <a href="../CV.html">CV</a>
+          </li>
+          <li>
+            <a href="../projects.html">Projects</a>
+          </li>
+          <li>
+            <a href="../travel.html">Travel</a>
+          </li>
+          <li>
+            <a href="../books.html">Books</a>
+          </li>
+        </ul>
+      </header>
+      <div class="projectWrapper">
+
+<h4>Abstract class vs interface and a little about objects</h4>
+
+<h3>Class</h3>
+<p>Is a template of an entity, which defines its initial state and behaviour. It's like a blueprint for objects. State is it's variables. Behaviour is it's methods.</p>
+
+<p>In addition to constructors an initialization can be made with the help of initializer block that are performed before any constructors.</p>
+<pre>
+  <code>
+    public class Animal {
+
+    public int speed;
+    public int maxSpeed;
+
+    {
+        speed = 5;
+    }
+    } 
+  </code>
+</pre>
+
+<p>Also there could be "static initialization blocks". Static variables and methods mean that all objects of a class will use this the same field \ method.</p>
+<pre>
+  <code>
+    public class Animal {
+
+    private static int speed;
+    private int maxSpeed;
+
+    static {
+        speed = 5;
+    }
+}
+  </code>
+</pre>
+
+<p>If you need to use static variables \ methods from another package, you can use "static" word in import block, so you will be able to call static members of a class without specifying a name of the class.</p>
+
+<p>In order to forbid inheritance from a class, it is required to mark it with a modifier final. Methods marked as final cannot be overridden.</p>
+
+<h3>Object</h3>
+<p>Is an existing instance of an entity (class), which possesses certain state and behaviour. Static fields exist before an object of a class is created. Static methods can not access a non-static fields and methods.</p>
+
+<h3>Abstract class vs Interface</h3>
+
+<p>Common</p>
+we can not create an object of abstract class and interface
+can have methods without body (they are abstract and have to be implemented) and with body
+
+<p>Differences</p>
+
+Abstract class: we can extend only one class
+can have final and not final variables
+
+
+Interface: 
+can implement a lot of interfaces
+all variables are final even if we don't write final word
+
+
+
+        <p>Summary:</p>
+        <p>1 – </p>
+        <p>2 – </p>
+        <p>3 – </p>
+        <p>4 – </p>
+        <p>5 – </p>
+      </div>
+      <div class="footer">
+        <div class="copirait">
+          <p class="footerText">Made by Marina Shvachko, 2022</p>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

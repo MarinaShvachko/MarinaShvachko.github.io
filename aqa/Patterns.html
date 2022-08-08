@@ -42,30 +42,86 @@
       </header>
       <div class="projectWrapper">
 
+        <h4>Patterns in automation</h4>
+
 <h3>Page elements</h3>
 
 <h3>POM</h3>
-<p>Page factory is an extension of pom</p>
+<p>Page object model is a design pattern where we create a class for each web page. This class consists of WebElements of this page and methods that use these WebElements.</p>
 
-<p>Annotations:</p>
+<p>To get access to WebElements on the pages we can use Page factory.</p>
+
+<h3>Page factory</h3>
+<p>Page factory is an extension of POM. To find an element in DOM annotations are used:</p>
+
 <p>@FindBy - one criterion</p>
-<p>@FindBys - some criteria and if one of them is met - an element is found (one any condition should be = true)</p>
-<p>@FindAll - some criteria and only if all of them are met - an element is found (all conditions should be = true)</p>
-
-<p>Elements that has annotation @Find(By\s\All) have to be initialized. It is done with a help of static method that we call in a construstor of pages</p>
+<p>@FindBys - some criteria and only if all of them are met - an element is found (all conditions should be = true). There could be parent-child relationship.</p>
 <pre>
   <code>
-    public class HomePage extends BasePage {
+    @FindBys({
+            @FindBy(id = "s"),
+            @FindBy(xpath = "//input[@name='q']")
+    })
+  </code>
+</pre>
+<p>@FindAll - some criteria and if one of them is met - an element is found (one any condition should be = true)</p>
+<pre>
+  <code>
+    @FindAll({
+            @FindBy(id = "s"),
+            @FindBy(xpath = "//input[@name='q']")
+    })
+  </code>
+</pre>
+
+<p>Elements can be found by using standart selectors:</p>
+<ol>
+  <li>@FindBy(id="here_is_id")</li>
+  <li>@FindBy(className = "here_is_classname")</li>
+  <li>@FindBy(name = "here_is_tag_name")</li>
+  <li>@FindBy(css = "here_is_caa_selector")</li>
+  <li>@FindBy(xpath = "here_is_xpath")</li>
+  <li>and so on</li>
+</ol>
+
+<p>Elements that are located by annotations @Find(By\s\All) have to be initialized by using method initElements(). It's possible to initialize elements by calling this method in a constructor of a base page, all call in in a constructor of each class.</p>
+<pre>
+  <code>
+  public class BasePage {
     WebDriver driver;
 
+    public BasePage(WebDriver driver) {
+        this.driver=driver;
+        <b>PageFactory.initElements(driver, this);</b>
+    }
+}
 
-    @FindBy(name = "uid")
-    WebElement userIdField;
+public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
+
+    @FindBy(xpath = "//input[@name='q']")
+    WebElement searchField;
+
+    @Step
+    public void fillSearchField(String string) {
+        searchField.sendKeys(string);
+        log.info("search by word " + string);
+    }
+}
+  </code>
+</pre>
+
+<p>Also Page Factory provides a "lazy load" concept using AjaxElementLocatorFactory. It can be useful in an application uses Ajax elements. You can specify a timeout value, until which the driver would wait before throwing an exceptio. It's something like implicit wait. But initialization should be made in this way <code>PageFactory.initElements(<b>new AjaxElementLocatorFactory(driver, 20)</b>, this);</code> where 20 is a number of seconds before timeout.</p>
+
+<p>If we are referring to the same web element multiple times we can use an annotation @CacheLookUp. It saves the web elements in cache memory after reading for the first time and then directly references it from memory.</p>
+<pre>
+  <code>
+    @CacheLookUp
+    @FindBy(xpath = "//input[@name='q']")
+    WebElement searchField;
   </code>
 </pre>
 

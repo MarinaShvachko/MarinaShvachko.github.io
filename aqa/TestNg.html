@@ -467,6 +467,47 @@ public class Salads {
 </pre>
 
 
+<h3>Data provider</h3>
+<p>It is connected with Data Driven Testing, when logic and test data are kept separately. For example you need a test method that will put a username and a password in fields and check login function. For this you might need some different pairs of username/password pairs. So, the simpliest example is below.</p>
+
+<p>Create a method that will provide username and password and declare it as data provider by adding an annotation @DataProvider. It can keep information inside the method itself or read it frome other resources like xls/CSV/JSON files or even a database.</p> 
+
+<p>Create a test method that needs different pairs username and password, they should be parameters. Link the data provider method to it by adding to the annotation @Test the name of data provider method (dataProvider = "NAME_OF_DATA_PROVIDER_METHOD"). And it's all.</p>
+
+<p>The test method will be run until all test data from the data provider method won't be processed. Also it's possible to add to the @DataProvider annotation (parallel = true), so tests will be executed in parallel, otherwise they will be executed one by one.</p>
+
+<pre>
+  <code>
+    public class DataProviderSimpleExample {
+
+      @Test(dataProvider = "getData") <b>//this is a linc to the data provider</b>
+      public void doLogin(String userName, String password) {
+          System.out.println(userName + " - " + password); <b>//here should be logic of test-case</b>
+      }
+
+      @DataProvider(parallel = true) //this is data provider itself
+      public Object[][] getData() {
+
+          return new Object[][]{
+                  {"1Martin@gmail.com", "pass1"},
+                  {"2Anna@gmail.com", "pass2"},
+                  {"3Tomr@gmail.com", "pass3"},
+                  {"4Lui@gmail.com", "pass4"},
+                  {"5Luka@gmail.com", "pass5"},
+                  {"6Mila@gmail.com", "pass6"},
+          };
+      }
+    }
+  </code>
+</pre>
+
+
+
+
+
+
+
+
 <h3>Listeners</h3>
 <p>Listeners implement the interface and catch and report real time events like test fails, test starts and ets. You need to do:</p>
 <ol>
@@ -588,6 +629,8 @@ public class Salads {
 
   </code>
 </pre>
+
+
 
 
 

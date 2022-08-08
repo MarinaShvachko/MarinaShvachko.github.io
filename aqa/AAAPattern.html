@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="stylesheet" href="../css/stylesAqaNotes.css">
+      <link rel="stylesheet" href="../css/adaptiveStylesAqaNotes.css">
+      <title>AAA</title>
+   </head>
+   <body>
+      <div class="container">
+         <header class="header">
+            <div class="menuBurger">
+               <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                  <g>
+                     <title>background</title>
+                     <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1" />
+                  </g>
+                  <g>
+                     <title>Layer 1</title>
+                     <path fill="#049900" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z" />
+                  </g>
+               </svg>
+            </div>
+            <ul class="menu clearfix">
+               <li>
+                  <a href="../index.html">Home</a>
+               </li>
+               <li>
+                  <a href="../CV.html">CV</a>
+               </li>
+               <li>
+                  <a href="../projects.html">Projects</a>
+               </li>
+               <li>
+                  <a href="../travel.html">Travel</a>
+               </li>
+               <li>
+                  <a href="../books.html">Books</a>
+               </li>
+            </ul>
+         </header>
+         <div class="projectWrapper">
+            <h4>Arrange/Act/Assert (AAA) is a pattern for organizing unit tests.</h4>
+            <p>This structure makes the code easier to read and understand. You should format your code to separate these steps.</p>
+
+            <ol>
+              <li>Arrange: setup and initialization required for the test</li>
+              <li>Act: call methods to test</li>
+              <li>Assert: Verify the outcomes</li>
+            </ol>
+
+<p>For example we have a class that sums up two numbers:</p>
+
+<pre>
+  <code>
+public class SumUp {
+    public int add (int firstNumber, int secondNumber) {
+        return firstNumber+secondNumber;
+    }
+}
+  </code>
+</pre>
+
+<p>And we have a class with tests that are created according to AAA. Creation of the object and initialization of int - is an Arrange part. Calling the method sumUp.add() is an Act part. And assert is an Assert part.</p>
+<pre>
+  <code>
+    public class SumUpTests {
+    
+    @Test
+    public void testSum() {
+        SumUp sumUp = new SumUp();
+        int firstNumber = 5;
+        int secondNumber = 2;
+
+        int result = sumUp.add(firstNumber, secondNumber);
+
+        Assert.assertEquals(result, 7);
+    }
+    
+}
+  </code>
+</pre>
+
+
+            <p>Summary:</p>
+            <p>1 – Easier to read, maintain, and enhance</p>
+            <p>2 – Useful for unit tests</p>
+         </div>
+         <div class="footer">
+            <div class="copirait">
+               <p class="footerText">Made by Marina Shvachko, 2022</p>
+            </div>
+         </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="script.js"></script>
+   </body>
+</html>

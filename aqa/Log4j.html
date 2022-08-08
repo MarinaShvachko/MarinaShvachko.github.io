@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../css/stylesAqaNotes.css">
+    <link rel="stylesheet" href="../css/adaptiveStylesAqaNotes.css">
+    <title>Log4j</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="menuBurger">
+          <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <title>background</title>
+              <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1" />
+            </g>
+            <g>
+              <title>Layer 1</title>
+              <path fill="#049900" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z" />
+            </g>
+          </svg>
+        </div>
+        <ul class="menu clearfix">
+          <li>
+            <a href="../index.html">Home</a>
+          </li>
+          <li>
+            <a href="../CV.html">CV</a>
+          </li>
+          <li>
+            <a href="../projects.html">Projects</a>
+          </li>
+          <li>
+            <a href="../travel.html">Travel</a>
+          </li>
+          <li>
+            <a href="../books.html">Books</a>
+          </li>
+        </ul>
+      </header>
+      <div class="projectWrapper">
+        <h4>Log4j for loggin in Java</h4>
+        <p>This is a logging framework written in Java with help of which logs can be printed to console or saved in files.</p>
+        <p>Library you need:</p>
+<pre>
+  <code>
+< dependency>
+  < groupId>log4j< /groupId>
+  < artifactId>log4j< /artifactId>
+  < version>1.2.17< /version>
+< /dependency>
+  </code>
+</pre>
+        <h3>Write logs to console:</h3>
+        <p>Create a file with a name "log4j.properties" in a package: src &#8594; main &#8594; resources. Example of content:</p>
+<code>
+  <pre>
+log4j.rootLogger=INFO, stdout
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target=System.out
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss} %p %c{2}: %m%n
+  </pre>
+</code>
+        <p>Then in a class you want to write logs create a static variable with a type Logger and put the class name in getLogger() method. If there is a base class from that all other classes extend, it's better to create the variable in the base class. Thus all subclasses will have an access to it and you don't need to dublicate code.</p>
+<code>
+  <pre>
+public class HomePage {
+  static final Logger log = Logger.getLogger(HomePage.class);
+}
+  </pre>
+</code>
+        <p>Now just use log object to call logging methods <code>log.info("message from logger")</code>. In console you will see <code>22/07/25 12:01:24 INFO HomePage: message from logger</code>
+        </p>
+        <p>Log levels:</p>
+        <ol>
+          <li>All - log everithing</li>
+          <li>Debug - </li>
+          <li>Info - </li>
+          <li>Warn - </li>
+          <li>Error - </li>
+          <li>Fatal - </li>
+        </ol>
+        <p>Summary:</p>
+        <p>1 – Don't use System.out.print() if you need to see what is happening while code is running, always use logging.</p>
+      </div>
+      <div class="footer">
+        <div class="copirait">
+          <p class="footerText">Made by Marina Shvachko, 2022</p>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

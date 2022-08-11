@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="stylesheet" href="../css/stylesAqaNotes.css">
+      <link rel="stylesheet" href="../css/adaptiveStylesAqaNotes.css">
+      <title>Collection Framework</title>
+   </head>
+   <body>
+      <div class="container">
+         <header class="header">
+            <div class="menuBurger">
+               <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                  <g>
+                     <title>background</title>
+                     <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1" />
+                  </g>
+                  <g>
+                     <title>Layer 1</title>
+                     <path fill="#049900" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z" />
+                  </g>
+               </svg>
+            </div>
+            <ul class="menu clearfix">
+               <li>
+                  <a href="../index.html">Home</a>
+               </li>
+               <li>
+                  <a href="../CV.html">CV</a>
+               </li>
+               <li>
+                  <a href="../projects.html">Projects</a>
+               </li>
+               <li>
+                  <a href="../travel.html">Travel</a>
+               </li>
+               <li>
+                  <a href="../books.html">Books</a>
+               </li>
+            </ul>
+         </header>
+         <div class="projectWrapper">
+            <h4>Collection framework</h4>
+            <p>It is a set of interfaces and classes which provide a ready-made architecture. The Iterable interface is the root interface. A class that implements the Iterable can be used with the for-loop. Then goes the Collection interface that extends Iterable interface. It is implemented through its subinterfaces like List, Set, and Queue.</p>
+
+            <h3>List interface</h3>
+            <p>It is an ordered collection that allows us to store and access elements sequentially. Classes that implement this interface are: ArrayList, LinkedList, Vector, Stack.</p>
+
+            <p><b>Classes ArrayList vs LinkedList</b></p>
+            <p>Common:</p>
+            <ol>
+              <li>Both implement interface List</li>
+              <li>Not fixed lenth</li>
+              <li>Maintain the insertion order of the items</li>
+              <li>Can hold duplicate items</li>
+            </ol>
+
+            <p>Difference:</p>
+            <p><b>ArrayList:</b></p>
+            <ol>
+              <li>There is an usual Array inside</li>
+              <li>When we need to add an item but there is no space:<br>
+    - a new inner Array is created inside ArrayList, that 1.5 bigger than a previouse one<br> 
+    - all items are copied from the old inner Array to the new one<br>
+    - the old Array will be destroyed</li>
+    <li>Operations like add and remove elements from a middle of an ArrayList work slower then in LinkedList, because all elements all elements after that position are shifted</li>
+    <li>Operations get and set work faster because we make direct request to the item by its index. Also add value to the end of an ArrayList works faster then in LinkedList.</li>
+    <li>Has Random access that means that we can reach a needed element directly, we don't need to iterate all elements.</li>
+    <li>Stores a single value in a single position</li>
+            </ol>
+
+             <p><b>LinkedList:</b></p>
+             <ol>
+               <li>There is a collection of nodes inside, that have links to each other (Doubly Linked List, each node stores 3 values (previous address, data, and next address))</li>
+               <li>Operations like add or remove nodes work faste because nodes are not shifted, just links are changed</li>
+               <li>Operations like get or set element by index work slower because to get a node for example with index 140 we need to check all nodes from the start or from the end (sequential access)</li>
+               <li>Linked lists have a special member called "Head", which gives the address of the first node.</li>
+               <li>Implements the Queue and the Deque interface</li>
+             </ol>
+
+
+
+
+            
+
+
+            <p>Summary:</p>
+            <p>1 – Use ArrayList if there are a lot of get() operations, or add() at the end of a list.</p>
+            <p>2 – Use LinkedList if there are a lot of add(), remove() operations, especially from the middle or start of a list</p>
+         </div>
+         <div class="footer">
+            <div class="copirait">
+               <p class="footerText">Made by Marina Shvachko, 2022</p>
+            </div>
+         </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="script.js"></script>
+   </body>
+</html>

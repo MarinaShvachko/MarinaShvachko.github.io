@@ -81,9 +81,8 @@
 	}
 
 	p {
-    font-size: 14px;
+        font-size: 14px;
 	}
-
 }
 
 @media screen and (max-width: 649px) {
@@ -160,16 +159,14 @@
     display: block; /* иконка гамбургер видна */
     padding-left: 20px;
     padding-top: 9px;
-     z-index: 100;
+    z-index: 100;
   }
 
-   .container {
+  .container {
     width: 100%;
-}
+  }
 
-p {
+  p {
     font-size: 15px;
-}
-
-  
+  }
 }

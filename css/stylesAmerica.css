@@ -43,29 +43,6 @@ p {
 	margin: auto;
 }
 
-/***** header *****/
-
-ul {
-	list-style: none;
-	margin: 0;
-	padding-left: 0;
-	display: flex;
-}
-
-.header a {
-	padding: 16px;
-	display: block;
-	/*border-right: 1px solid #fff;*/
-	width: 50px;
-	text-align: center;
-}
-
-.header {
-	width: 100%;
-	background: #2c2c2c;
-	height: 50px;
-}
-
 /***** content *****/
 
 .projectWrapper {
@@ -129,36 +106,6 @@ ul {
 .photoInText {
 	width: 50%;
 }
-
-/***** footer *****/
-
-.footer {
-	width: 100%;
-	background: #2c2c2c;
-	height: 50px;
-	display: flex;
-	align-self: flex-end;
-}
-
-.copirait {
-	width:100%;
-	align-self: flex-end;
-}
-
-.footerText {
-	font-family: 'Arial';
-    color: #fff;
-    font-size: 11px;
-    line-height: 28px;
-    padding-left: 25px;
-    margin-bottom: 5px;
-}
-
-
-
-
-
-
 .introduction {
 	display: flex;
 	width: 30%;

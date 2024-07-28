@@ -136,22 +136,24 @@ a:hover {
 
 /***** footer *****/
 
-.footer {
+/**.footer {
 	width: 100%;
 	background: #2c2c2c;
 	height: 50px;
 	display: flex;
 	align-self: flex-end;
 	order: 4;
-}
+}**/
 
 @media screen and (max-width: 1459px) {
 
-	.container {
-    width: 80%;
+    .container {
+        width: 80%;
 	}
 
-
+	.footer {
+        width: 80%;
+    }
 
 	/*h2 {
 	font-size: 30px;
@@ -172,25 +174,27 @@ a:hover {
   display: none;   /* hide hamburger menu */
 }
 
+@media screen and (max-width: 699px) {
+    .storyFromVacation {
+        width: 100%;
+        min-height: calc(40vh - 99px);
+        order: 2;
+    }
 
-  @media screen and (max-width: 699px) {
-  .storyFromVacation {
-    width: 100%;
-    min-height: calc(40vh - 99px);
-    order: 2;
-}
-
-.storyContent {
-    width: 100%;
-    min-height: calc(100vh - 100px);
-    order: 3;
-}
+    .storyContent {
+        width: 100%;
+        min-height: calc(100vh - 100px);
+        order: 3;
+    }
 
     .container {
         width:90%;
     }
 
-  }
+    .footer {
+    	width: 90%;
+    }
+}
 
 @media screen and (max-width: 450px) {
   .menu {
@@ -215,10 +219,14 @@ a:hover {
 
   .container {
     width: 100%;
-    }
+  }
 
-    .storyFromVacation {
+  .storyFromVacation {
     width: 90%;
     margin: auto;
-}
+  }
+
+    .footer {
+      	width: 100%;
+    }
 }

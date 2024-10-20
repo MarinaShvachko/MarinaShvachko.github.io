@@ -327,7 +327,7 @@ public class Salads {
   </code>
 </pre>
 
-<p>To start all test via testng.xml, that are linked with a group you should specify the name of the group in a tag "include" and what class\classes you want to run. So, in the example above the group "Regress" is in two classes: in Salads and in Drinks, if I want to run both classes I should specify them.</p>
+<p>To start all tests via testng.xml, that are linked with a group you should specify the name of the group in a tag "include" and what class\classes you want to run. So, in the example above the group "Regress" is in two classes: in Salads and in Drinks, if I want to run both classes I should specify them.</p>
 
 <pre>
   <code>
@@ -357,7 +357,7 @@ public class Salads {
    <img class="FullimgInText" src="../img/testng/RunGroupOfTestsInAllClasses.png" alt="Run group of tests in all classes">
 </p>
 
-<p>If you need not execute a group just change tag "include" to "exclude". If a test is in excluded group it won't be run even if at the same time it is in included groups.</p>
+<p>If you don't need to execute a group just change tag "include" to "exclude". If a test is in excluded group it won't be run even if at the same time it is in included groups.</p>
 <p>In the class Salads the method chickenSalad() lineked with 2 groups: (groups = {"Regress", "Smoke"}). In testng.xml the group "Regress" excluded, but the group "Smoke" included, but the method won't be run.</p>
 
 <pre>

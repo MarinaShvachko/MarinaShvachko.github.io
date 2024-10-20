@@ -2,7 +2,7 @@
 
 @media screen and (max-width: 1200px) {
 
-p {
+.title {
    font-size: 15px;
 }
 }
@@ -34,7 +34,7 @@ p {
         width: 50%;
 	}
 
-  p {
+  .title {
     font-size: 13px;
   }
 
@@ -55,7 +55,7 @@ p {
     .imgInText {
         width: 100%;
     }
-    p {
+    .title {
         font-size: 10px;
     }
 }
@@ -82,7 +82,7 @@ p {
     .FullimgInText {
         width: 100%;
     }
-    p {
+    .title {
       font-size: 9px;
     }
   /*.menu li {

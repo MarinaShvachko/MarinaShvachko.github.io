@@ -180,4 +180,8 @@
     order: 2;
     outline: none;
   }
+
+      .footer {
+          width: 100%;
+      }
 }
